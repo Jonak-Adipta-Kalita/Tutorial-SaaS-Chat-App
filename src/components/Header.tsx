@@ -1,5 +1,13 @@
+import Logo from "./Logo";
+
 const Header = () => {
-  return <div></div>;
+  return (
+    <div>
+      <nav>
+        <Logo />
+      </nav>
+    </div>
+  );
 };
 
 export default Header;
