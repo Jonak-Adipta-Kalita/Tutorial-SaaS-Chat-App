@@ -1,3 +1,4 @@
+import DarkModeToggle from "./DarkModeToggle";
 import Logo from "./Logo";
 
 const Header = () => {
@@ -10,7 +11,7 @@ const Header = () => {
           {/* Session && (
             ...
           ) */}
-          {/* DarkModeToggle */}
+          <DarkModeToggle />
           {/* UserButton */}
         </div>
       </nav>
