@@ -7,10 +7,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import UserAvatar from "./UserAvatar";
+import type { Session } from "next-auth";
+import SignInButton from "./SignInButton";
 
-type Props = {};
+type Props = {
+  session: Session | null;
+};
 
-const UserButton = (props: Props) => {
+const UserButton = ({ session }: Props) => {
+  if (!session) return <SignInButton />;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
