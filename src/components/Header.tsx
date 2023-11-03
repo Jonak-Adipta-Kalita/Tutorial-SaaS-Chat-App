@@ -5,6 +5,7 @@ import Logo from "./Logo";
 import UserButton from "./UserButton";
 import Link from "next/link";
 import { MessagesSquareIcon } from "lucide-react";
+import CreateChatButton from "./CreateChatButton";
 
 const Header = async () => {
   const session = await getServerSession(authOptions);
@@ -16,13 +17,16 @@ const Header = async () => {
         <div className="flex-1 flex items-center justify-end space-x-4">
           {/* Language Select */}
           {session ? (
-            <Link
-              href="/chat"
-              prefetch={false}
-              className="text-black dark:text-white"
-            >
-              <MessagesSquareIcon />
-            </Link>
+            <>
+              <Link
+                href="/chat"
+                prefetch={false}
+                className="text-black dark:text-white"
+              >
+                <MessagesSquareIcon />
+              </Link>
+              <CreateChatButton />
+            </>
           ) : (
             <Link href="/pricing">Pricing</Link>
           )}
