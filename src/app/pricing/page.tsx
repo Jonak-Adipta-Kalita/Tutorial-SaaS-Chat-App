@@ -32,7 +32,7 @@ const PricingPage = (props: Props) => {
               ry={512}
             />
             <defs>
-              <radialGradient>
+              <radialGradient id="radial-gradient-pricing">
                 <stop stopColor="#777506" />
                 <stop offset={1} stopColor="#E935C1" />
               </radialGradient>
