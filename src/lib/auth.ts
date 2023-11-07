@@ -14,4 +14,20 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   adapter: FirestoreAdapter(adminDB),
+  callbacks: {
+    jwt: async ({ user, token }) => {
+      if (user) {
+        token.sub = user.id;
+      }
+
+      return token;
+    },
+    session: async ({ session, token }) => {
+      if (session?.user) {
+        if (token.sub) session.user.id = token.sub;
+      }
+
+      return session;
+    },
+  },
 } satisfies NextAuthOptions;
