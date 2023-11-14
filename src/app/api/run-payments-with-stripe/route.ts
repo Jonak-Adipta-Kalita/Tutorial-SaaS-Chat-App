@@ -1,1 +1,1 @@
-// I hate Firestore Extensions.
+export const POST = async (request: Request) => {};
