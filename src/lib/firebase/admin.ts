@@ -1,6 +1,5 @@
 import { initFirestore } from "@auth/firebase-adapter";
 import admin from "firebase-admin";
-import { initializeAuth } from "firebase/auth/cordova";
 
 const credential = admin.credential.cert({
   projectId: process.env.FIREBASE_PROJECT_ID,
