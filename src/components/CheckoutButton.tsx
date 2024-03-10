@@ -1,13 +1,11 @@
 "use client";
 
 import { db } from "@/lib/firebase/client";
-import { addDoc, collection } from "firebase/firestore/lite";
+import { addDoc, collection } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 
-type Props = {};
-
-const CheckoutButton = (props: Props) => {
+const CheckoutButton = () => {
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
 
