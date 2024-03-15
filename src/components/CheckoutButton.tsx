@@ -19,7 +19,7 @@ const CheckoutButton = () => {
         price: "price_stripe",
         success_url: window.location.origin + "/chat",
         cancel_url: window.location.origin,
-      }
+      },
     );
   };
 
