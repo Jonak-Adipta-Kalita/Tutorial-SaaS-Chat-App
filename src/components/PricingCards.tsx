@@ -5,7 +5,7 @@ import CheckoutButton from "./CheckoutButton";
 const tiers = [
   {
     name: "Starter",
-    id: null,
+    id: "starter",
     href: "#",
     priceMonthly: null,
     description: "Get chatting right away with anyone, anywhere!",
@@ -19,7 +19,7 @@ const tiers = [
   },
   {
     name: "Pro",
-    id: "subIdFromStripe",
+    id: "pro",
     href: "#",
     priceMonthly: "₹500",
     description: "Unlock the Full Potential with Pro!",
