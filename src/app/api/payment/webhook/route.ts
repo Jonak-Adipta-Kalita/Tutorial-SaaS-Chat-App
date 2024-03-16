@@ -10,15 +10,7 @@ import {
   insertPaymentRecord,
 } from "@/lib/payment/webhook";
 import Stripe from "stripe";
-
-export const buffer = async (readable: any) => {
-  const chunks = [];
-  for await (const chunk of readable) {
-    chunks.push(typeof chunk === "string" ? Buffer.from(chunk) : chunk);
-  }
-
-  return Buffer.concat(chunks);
-};
+import { headers } from "next/headers";
 
 export const POST = async (req: Request) => {
   const relevantEvents = new Set([
@@ -49,13 +41,10 @@ export const POST = async (req: Request) => {
   ]);
   let event: Stripe.Event;
 
-  const requestBuffer = await buffer(req);
-
   try {
     event = stripe.webhooks.constructEvent(
-      requestBuffer.toString(),
-      //@ts-ignore
-      req.headers["stripe-signature"],
+      await req.text(),
+      headers().get("Stripe-Signature")!,
       process.env.STRIPE_WEBHOOK_SECRET!,
     );
   } catch (err: any) {
@@ -147,11 +136,4 @@ export const POST = async (req: Request) => {
   }
 
   Response.json({ received: true });
-};
-
-export const config = {
-  api: {
-    bodyParser: false,
-    externalResolver: true,
-  },
 };
