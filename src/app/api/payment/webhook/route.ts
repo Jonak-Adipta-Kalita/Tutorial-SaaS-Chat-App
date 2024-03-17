@@ -135,5 +135,5 @@ export const POST = async (req: Request) => {
     }
   }
 
-  Response.json({ received: true });
+  return Response.json({ received: true });
 };
