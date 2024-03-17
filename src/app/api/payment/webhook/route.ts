@@ -48,7 +48,7 @@ export const POST = async (req: Request) => {
       process.env.STRIPE_WEBHOOK_SECRET!,
     );
   } catch (err: any) {
-    return Response.json({ err }, { status: err.status });
+    return new Response(err, { status: err.status });
   }
 
   if (relevantEvents.has(event.type)) {
@@ -131,7 +131,7 @@ export const POST = async (req: Request) => {
           console.log(`Unhandled Event: ${event.type}`);
       }
     } catch (err: any) {
-      return Response.json({ err }, { status: err.status });
+      return new Response(err, { status: err.status });
     }
   }
 

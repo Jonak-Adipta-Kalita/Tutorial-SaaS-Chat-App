@@ -12,10 +12,10 @@
   resolved "https://registry.yarnpkg.com/@alloc/quick-lru/-/quick-lru-5.2.0.tgz#7bf68b20c0a350f936915fcae06f58e32007ce30"
   integrity sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==
 
-"@auth/core@0.28.0":
-  version "0.28.0"
-  resolved "https://registry.yarnpkg.com/@auth/core/-/core-0.28.0.tgz#3e3aa723062e3f1daf28eb47688db622bf119396"
-  integrity sha512-/fh/tb/L4NMSYcyPoo4Imn8vN6MskcVfgESF8/ndgtI4fhD/7u7i5fTVzWgNRZ4ebIEGHNDbWFRxaTu1NtQgvA==
+"@auth/core@0.23.0":
+  version "0.23.0"
+  resolved "https://registry.yarnpkg.com/@auth/core/-/core-0.23.0.tgz#66e9ce67bda171d3eabadd3519099ede66c57f18"
+  integrity sha512-vReM7RIX4BDj/EKyM6OiYnEw4u0MOEC+c2tB7V0qoZy2JZ/hn1xEuDMJwmdcvZNCjQ6kp4cW/6eTcCcEDsRbEA==
   dependencies:
     "@panva/hkdf" "^1.1.1"
     "@types/cookie" "0.6.0"
@@ -25,12 +25,12 @@
     preact "10.11.3"
     preact-render-to-string "5.2.3"
 
-"@auth/firebase-adapter@^1.0.3":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@auth/firebase-adapter/-/firebase-adapter-1.5.0.tgz#06ac6b5ee0977a661983883be22bc41c69d0be14"
-  integrity sha512-oMZ7DJEWSKJDnVnZIyjXgkW45orUvkrVytrYmLR9i/vuWbcFHX9iwvlM/yVaiI8ftsvXLjs8K3fl6Mv9KH5sbQ==
+"@auth/firebase-adapter@~1.0.3":
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/@auth/firebase-adapter/-/firebase-adapter-1.0.15.tgz#503ee35983f7db2c7dbfe3a2528c12520cb6e3cd"
+  integrity sha512-YbAY+MU431YITUZ9UUVKwdnrAGsH9v0IKRNsuAEoxC6/cJ4c03YRKwZJ+UQf13le6LrIgBKawb4oXGlj+H45+w==
   dependencies:
-    "@auth/core" "0.28.0"
+    "@auth/core" "0.23.0"
 
 "@babel/parser@^7.20.15":
   version "7.24.0"
@@ -2394,7 +2394,7 @@ find-up@^5.0.0:
     locate-path "^6.0.0"
     path-exists "^4.0.0"
 
-firebase-admin@^11.11.0:
+firebase-admin@~11.11.0:
   version "11.11.1"
   resolved "https://registry.yarnpkg.com/firebase-admin/-/firebase-admin-11.11.1.tgz#6712923de70d218c9f514d73005d976d03339605"
   integrity sha512-UyEbq+3u6jWzCYbUntv/HuJiTixwh36G1R9j0v71mSvGAx/YZEWEW7uSGLYxBYE6ckVRQoKMr40PYUEzrm/4dg==
@@ -3517,7 +3517,7 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
 
-next-auth@^4.24.4:
+next-auth@~4.24.4:
   version "4.24.7"
   resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-4.24.7.tgz#0a14c1e35b4a2c0c1ecff95c295b74bd48d3817a"
   integrity sha512-iChjE8ov/1K/z98gdKbn2Jw+2vLgJtVV39X+rCP5SGnVQuco7QOr19FRNGMIrD8d3LYhHWV9j9sKLzq1aDWWQQ==
