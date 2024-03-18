@@ -8,7 +8,6 @@ export default () => {
   const { subscription } = useSubscriptionStore();
   const isPro = subscription?.role === "pro";
 
-  console.log(subscription);
   const router = useRouter();
 
   if (subscription === undefined || isPro) return null;

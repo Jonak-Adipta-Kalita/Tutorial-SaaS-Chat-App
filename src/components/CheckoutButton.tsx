@@ -62,7 +62,9 @@ const CheckoutButton = () => {
         {isSubscribed ? (
           <ManageAccountButton />
         ) : isLoadingSubscription || loading ? (
-          <LoadingSpinner />
+          <div className="w-full px-3.5 py-2">
+            <LoadingSpinner />
+          </div>
         ) : (
           <button
             className="w-full px-3.5 py-2"
