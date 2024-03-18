@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import ClientProvider from "@/components/providers/ClientProvider";
 import FirebaseAuthProvider from "@/components/providers/FirebaseAuthProvider";
+import SubscriptionProvider from "@/components/providers/SubscriptionProvider";
 
 export const metadata: Metadata = {
   title: "JAK SaaS Chat App",
@@ -20,15 +21,17 @@ export default function RootLayout({
       <html lang="en">
         <body className="flex flex-col min-h-screen">
           <FirebaseAuthProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <Header />
-              {children}
-            </ThemeProvider>
+            <SubscriptionProvider>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
+              >
+                <Header />
+                {children}
+              </ThemeProvider>
+            </SubscriptionProvider>
           </FirebaseAuthProvider>
         </body>
       </html>
