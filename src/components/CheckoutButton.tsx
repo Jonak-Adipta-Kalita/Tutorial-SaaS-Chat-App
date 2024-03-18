@@ -5,10 +5,17 @@ import { addDoc, collection, onSnapshot } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
+import { useSubscriptionStore } from "@/lib/store";
+import ManageAccountButton from "./ManageAccountButton";
 
 const CheckoutButton = () => {
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
+  const { subscription } = useSubscriptionStore();
+
+  const isLoadingSubscription = subscription === undefined;
+  const isSubscribed =
+    subscription?.status === "active" && subscription?.role === "pro";
 
   const createCheckoutSession = async () => {
     if (!session?.user?.id) return;
@@ -51,12 +58,20 @@ const CheckoutButton = () => {
 
   return (
     <div className="flex flex-col spance-y-2">
-      <button
-        onClick={() => createCheckoutSession()}
-        className="mt-8 block rounded-md bg-indigo-600 px-3.5 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer disabled:opacity-80 disabled:bg-indigo-600/50 disabled:text-white disabled:cursor-default"
-      >
-        {!loading ? <LoadingSpinner /> : "Sign Up"}
-      </button>
+      <div className="mt-8 block rounded-md bg-indigo-600 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer disabled:opacity-80 disabled:bg-indigo-600/50 disabled:text-white disabled:cursor-default">
+        {isSubscribed ? (
+          <ManageAccountButton />
+        ) : isLoadingSubscription || loading ? (
+          <LoadingSpinner />
+        ) : (
+          <button
+            className="w-full px-3.5 py-2"
+            onClick={() => createCheckoutSession()}
+          >
+            Sign Up
+          </button>
+        )}
+      </div>
     </div>
   );
 };
