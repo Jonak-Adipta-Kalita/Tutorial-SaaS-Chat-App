@@ -18,11 +18,12 @@ const subscriptionConverter: FirestoreDataConverter<Subscription> = {
   ): Subscription => {
     const data = snapshot.data(options);
 
-    return { id: snapshot.id, ...data };
+    const sub = { id: snapshot.id, ...data };
+    return sub;
   },
 };
 
 export const subscriptionRef = (userId: string) =>
-  collection(db, "customers", userId, "subscription").withConverter(
+  collection(db, "customers", userId, "subscriptions").withConverter(
     subscriptionConverter,
   );

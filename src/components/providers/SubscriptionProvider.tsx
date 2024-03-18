@@ -2,7 +2,6 @@
 
 import { subscriptionRef } from "@/lib/firebase/converters/subscription";
 import { useSubscriptionStore } from "@/lib/store";
-import { error } from "console";
 import { onSnapshot } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import { ReactNode, useEffect } from "react";
@@ -13,8 +12,9 @@ const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!session) return;
+
     return onSnapshot(
-      subscriptionRef(session?.user.id!),
+      subscriptionRef(session?.user.id),
       (snapshot) => {
         if (snapshot.empty) {
           setSubscription(null);
