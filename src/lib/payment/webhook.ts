@@ -7,10 +7,7 @@ import {
   TaxRate,
 } from "@/typings/stripe-payments";
 import { Timestamp } from "firebase-admin/firestore";
-
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2023-10-16",
-});
+import { stripe } from "./stripe";
 
 const prefixMetadata = (metadata: any) =>
   Object.keys(metadata).reduce((prefixedMetadata: any, key: any) => {

@@ -6,11 +6,11 @@ import {
   insertTaxRateRecord,
   manageSubscriptionStatusChange,
   insertInvoiceRecord,
-  stripe,
   insertPaymentRecord,
 } from "@/lib/payment/webhook";
 import Stripe from "stripe";
 import { headers } from "next/headers";
+import { stripe } from "@/lib/payment/stripe";
 
 export const POST = async (req: Request) => {
   const relevantEvents = new Set([
