@@ -4,6 +4,7 @@ import {
   QueryDocumentSnapshot,
   SnapshotOptions,
   collection,
+  collectionGroup,
   doc,
   query,
   where,
@@ -52,6 +53,7 @@ export const chatMemberAdminRef = (chatId: string) =>
   ).withConverter(chatMembersConverter);
 
 export const chatMembersCollectionGroupRef = (userId: string) =>
-  query(collection(db, "members"), where("userId", "==", userId)).withConverter(
-    chatMembersConverter,
-  );
+  query(
+    collectionGroup(db, "members"),
+    where("userId", "==", userId),
+  ).withConverter(chatMembersConverter);
