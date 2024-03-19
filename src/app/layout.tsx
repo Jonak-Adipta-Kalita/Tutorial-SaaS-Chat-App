@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import ClientProvider from "@/components/providers/ClientProvider";
 import FirebaseAuthProvider from "@/components/providers/FirebaseAuthProvider";
 import SubscriptionProvider from "@/components/providers/SubscriptionProvider";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "JAK SaaS Chat App",
@@ -30,6 +31,7 @@ export default function RootLayout({
               >
                 <Header />
                 {children}
+                <Toaster />
               </ThemeProvider>
             </SubscriptionProvider>
           </FirebaseAuthProvider>
