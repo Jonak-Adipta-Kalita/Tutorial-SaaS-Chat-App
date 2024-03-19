@@ -50,6 +50,11 @@ service cloud.firestore {
         }
       }
     }
+
+    match /{path=**}/members/{memberId} {
+      allow read, write;
+      // allow write: if resource.data.isAdmin == true;
+    }
   }
 }
 
