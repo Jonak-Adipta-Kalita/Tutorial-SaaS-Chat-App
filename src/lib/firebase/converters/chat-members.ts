@@ -3,6 +3,7 @@ import {
   FirestoreDataConverter,
   QueryDocumentSnapshot,
   SnapshotOptions,
+  Timestamp,
   collection,
   collectionGroup,
   doc,
@@ -14,7 +15,7 @@ import { db } from "../client";
 export interface ChatMember {
   userId: string;
   email: string;
-  timestamp: Date | null;
+  timestamp: Timestamp | null;
   isAdmin: boolean;
   chatId: string;
   image: string;
