@@ -27,7 +27,7 @@ const CheckoutButton = () => {
         price: "price_1OvYUOSCMiKn0Wru4SdSivRo",
         success_url: window.location.origin + "/chat",
         cancel_url: window.location.origin,
-      },
+      }
     );
 
     await fetch("/api/payment/create-checkout-session", {
