@@ -21,7 +21,7 @@ import {
 import { useToast } from "./ui/use-toast";
 import { useSubscriptionStore } from "@/lib/store";
 import { ToastAction } from "@radix-ui/react-toast";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   input: z.string().max(1000),
@@ -70,7 +70,7 @@ const ChatInput = ({ chatId }: { chatId: string }) => {
       });
     }
 
-    addDoc(messagesRef(chatId), {
+    const docRef = await addDoc(messagesRef(chatId), {
       input: inputCopy,
       timestamp: serverTimestamp(),
       user: {
@@ -78,6 +78,15 @@ const ChatInput = ({ chatId }: { chatId: string }) => {
         name: session.user.name as string,
         email: session.user.email as string,
         image: session.user.image as string,
+      },
+    });
+
+    await fetch("/api/translation", {
+      method: "POST",
+      body: JSON.stringify({ docRefId: docRef.id, chatId: chatId }),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
     });
   };
