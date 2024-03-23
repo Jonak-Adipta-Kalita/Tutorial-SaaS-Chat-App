@@ -151,11 +151,14 @@ export const POST = async (req: Request) => {
         url: session.url,
         created: Timestamp.now(),
       },
-      { merge: true },
+      { merge: true }
     );
     return Response.json({ recieved: true });
   } catch (err: any) {
-    await docRef.set({ error: { message: err.message } }, { merge: true });
+    await docRef.set(
+      { error: { message: err.message, status: err.status } },
+      { merge: true }
+    );
     return new Response(err, { status: err.status });
   }
 };
