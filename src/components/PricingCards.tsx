@@ -10,7 +10,7 @@ const tiers = [
     priceMonthly: null,
     description: "Get chatting right away with anyone, anywhere!",
     features: [
-      "Unlimited Message Chat limit in Chats",
+      "20 Message Chat limit in Chats",
       "2 Participant limit in Chat",
       "3 Chat Rooms limit",
       "Supports 2 languages",

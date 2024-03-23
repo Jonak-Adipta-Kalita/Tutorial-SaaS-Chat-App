@@ -35,7 +35,7 @@ const messageConverter: FirestoreDataConverter<Message> = {
   },
   fromFirestore: (
     snapshot: QueryDocumentSnapshot<Message>,
-    options: SnapshotOptions,
+    options: SnapshotOptions
   ): Message => {
     const data = snapshot.data(options);
 
@@ -50,9 +50,8 @@ const messageConverter: FirestoreDataConverter<Message> = {
 export const messagesRef = (chatId: string) =>
   collection(db, "chats", chatId, "messages").withConverter(messageConverter);
 
-// // Gonna give unlimited access to free users
-// export const limitedMessagesRef = (chatId: string) =>
-//   query(messagesRef(chatId), limit(25));
+export const limitedMessagesRef = (chatId: string) =>
+  query(messagesRef(chatId), limit(20));
 
 export const sortedMessagesRef = (chatId: string) =>
   query(messagesRef(chatId), orderBy("timestamp", "asc"));

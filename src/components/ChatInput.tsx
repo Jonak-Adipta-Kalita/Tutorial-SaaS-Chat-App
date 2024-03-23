@@ -13,9 +13,15 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { addDoc, serverTimestamp } from "firebase/firestore";
-import { messagesRef } from "@/lib/firebase/converters/message";
+import { addDoc, getDocs, serverTimestamp } from "firebase/firestore";
+import {
+  limitedMessagesRef,
+  messagesRef,
+} from "@/lib/firebase/converters/message";
 import { useToast } from "./ui/use-toast";
+import { useSubscriptionStore } from "@/lib/store";
+import { ToastAction } from "@radix-ui/react-toast";
+import { useRouter } from "next/router";
 
 const formSchema = z.object({
   input: z.string().max(1000),
@@ -23,7 +29,9 @@ const formSchema = z.object({
 
 const ChatInput = ({ chatId }: { chatId: string }) => {
   const { data: session } = useSession();
+  const { subscription } = useSubscriptionStore();
   const { toast } = useToast();
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -36,7 +44,28 @@ const ChatInput = ({ chatId }: { chatId: string }) => {
       return;
     }
 
-    // Restrict F2P Users
+    const messages = (await getDocs(limitedMessagesRef(chatId))).docs.map(
+      (doc) => doc.data()
+    ).length;
+    const isPro =
+      subscription?.role === "pro" && subscription.status === "active";
+
+    if (!isPro && messages >= 20) {
+      toast({
+        title: "Free plan lit exceeded",
+        description:
+          "You've exceeded the FREE plan limit of 20 messages per chat, Upgrade to PRRO for unlimited chat messages!",
+        variant: "destructive",
+        action: (
+          <ToastAction
+            altText="Upgrade"
+            onClick={() => router.push("/register")}
+          >
+            Upgrade to PRO
+          </ToastAction>
+        ),
+      });
+    }
 
     addDoc(messagesRef(chatId), {
       input: values.input,
@@ -48,6 +77,8 @@ const ChatInput = ({ chatId }: { chatId: string }) => {
         image: session.user.image as string,
       },
     });
+
+    form.reset();
   };
 
   return (
