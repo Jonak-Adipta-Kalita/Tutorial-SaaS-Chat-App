@@ -38,12 +38,15 @@ export const useLanguageStore = create<LanguageState>((set) => ({
   setLanguage: (language: LanguagesSupported) => set({ language }),
   getLanguages: (isPro: boolean) =>
     isPro
-      ? Object.keys(LanguagesSupportedMap) as LanguagesSupported[]
-      : Object.keys(LanguagesSupportedMap).slice(0, 2) as LanguagesSupported[],
+      ? (Object.keys(LanguagesSupportedMap) as LanguagesSupported[])
+      : (Object.keys(LanguagesSupportedMap).slice(
+          0,
+          2
+        ) as LanguagesSupported[]),
   getNotSupportedLanguages: (isPro: boolean) =>
     isPro
       ? []
-      : Object.keys(LanguagesSupportedMap).slice(2) as LanguagesSupported[],
+      : (Object.keys(LanguagesSupportedMap).slice(2) as LanguagesSupported[]),
 }));
 
 interface SubscriptionState {

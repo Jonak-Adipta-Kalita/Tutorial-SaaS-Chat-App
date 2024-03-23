@@ -21,7 +21,7 @@ const Row = ({ chatId }: { chatId: string }) => {
   const { data: session } = useSession();
   const router = useRouter();
   const [messages, loading, error] = useCollectionData<Message>(
-    limitedSortedMessagesRef(chatId),
+    limitedSortedMessagesRef(chatId)
   );
 
   const row = (message?: Message) => {
@@ -79,7 +79,7 @@ export default ({ initialChats }: { initialChats: ChatMember[] }) => {
 
   const [members, loading, error] = useCollectionData<ChatMember>(
     session && chatMembersCollectionGroupRef(session?.user.id),
-    { initialValue: initialChats },
+    { initialValue: initialChats }
   );
 
   if (members?.length === 0)
@@ -95,6 +95,10 @@ export default ({ initialChats }: { initialChats: ChatMember[] }) => {
     );
 
   return (
-    <div>{members?.map((member, i) => <Row chatId={member.chatId} />)}</div>
+    <div>
+      {members?.map((member, i) => (
+        <Row chatId={member.chatId} />
+      ))}
+    </div>
   );
 };
