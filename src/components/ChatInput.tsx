@@ -40,7 +40,10 @@ const ChatInput = ({ chatId }: { chatId: string }) => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    if (values.input.length === 0 || !session?.user) {
+    const inputCopy = values.input.trim();
+    form.reset();
+
+    if (inputCopy.length === 0 || !session?.user) {
       return;
     }
 
@@ -68,7 +71,7 @@ const ChatInput = ({ chatId }: { chatId: string }) => {
     }
 
     addDoc(messagesRef(chatId), {
-      input: values.input,
+      input: inputCopy,
       timestamp: serverTimestamp(),
       user: {
         id: session.user.id as string,
@@ -77,8 +80,6 @@ const ChatInput = ({ chatId }: { chatId: string }) => {
         image: session.user.image as string,
       },
     });
-
-    form.reset();
   };
 
   return (
