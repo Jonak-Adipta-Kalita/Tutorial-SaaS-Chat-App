@@ -97,7 +97,7 @@ export default ({ initialChats }: { initialChats: ChatMember[] }) => {
   return (
     <div>
       {members?.map((member, i) => (
-        <Row chatId={member.chatId} />
+        <Row chatId={member.chatId} key={i} />
       ))}
     </div>
   );
