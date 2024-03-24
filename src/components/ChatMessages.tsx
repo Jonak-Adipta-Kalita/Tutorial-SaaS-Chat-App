@@ -77,6 +77,7 @@ const ChatMessages = ({ chatId, initialMessages, session }: Props) => {
           </div>
         );
       })}
+      <div ref={messagesEndRef} />
     </div>
   );
 };
