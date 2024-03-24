@@ -28,6 +28,10 @@ export interface Message {
   translated?: {
     [K in LanguagesSupported]?: string;
   };
+  error?: {
+    message: string;
+    status: number;
+  };
 }
 
 const messageConverter: FirestoreDataConverter<Message> = {
