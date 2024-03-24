@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  LanguagesSupported,
   LanguagesSupportedMap,
   useLanguageStore,
   useSubscriptionStore,
@@ -31,12 +32,9 @@ const LanguageSelected = (props: Props) => {
 
   return (
     isChatPage && (
-      <Select>
+      <Select onValueChange={(value: LanguagesSupported) => setLanguage(value)}>
         <SelectTrigger className="w-[150px] text-black dark:text-white">
-          <SelectValue
-            className=""
-            placeholder={LanguagesSupportedMap[language]}
-          />
+          <SelectValue placeholder={LanguagesSupportedMap[language]} />
         </SelectTrigger>
         <SelectContent>
           {subscription === undefined ? (
