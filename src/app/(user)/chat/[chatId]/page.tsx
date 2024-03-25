@@ -1,3 +1,4 @@
+import AdminControls from "@/components/AdminControls";
 import ChatInput from "@/components/ChatInput";
 import ChatMembersBadges from "@/components/ChatMembersBadges";
 import ChatMessages from "@/components/ChatMessages";
@@ -19,6 +20,7 @@ export default async ({
 
   return (
     <>
+      <AdminControls chatId={chatId} />
       <ChatMembersBadges chatId={chatId} />
       <div className="flex-1">
         <ChatMessages
