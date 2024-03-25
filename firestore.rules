@@ -50,7 +50,7 @@ service cloud.firestore {
 
         match /messages/{messageId} {
           allow read;
-          allow write: if exists(/databases/$(database)/documents/chats/$(chatId)/members/$(request.auth.uid))
+          allow write: if exists(/databases/$(database)/documents/chats/$(chatId)/members/$(request.auth.uid));
         }
       }
     }
