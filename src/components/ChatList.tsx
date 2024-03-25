@@ -16,6 +16,7 @@ import { Skeleton } from "./ui/skeleton";
 import { useRouter } from "next/navigation";
 import UserAvatar from "./UserAvatar";
 import { prettyUUID } from "@/lib/utils";
+import { useLanguageStore } from "@/lib/store";
 
 const Row = ({ chatId }: { chatId: string }) => {
   const { data: session } = useSession();
@@ -23,6 +24,7 @@ const Row = ({ chatId }: { chatId: string }) => {
   const [messages, loading, error] = useCollectionData<Message>(
     limitedSortedMessagesRef(chatId)
   );
+  const { language } = useLanguageStore();
 
   const row = (message?: Message) => {
     return (
@@ -43,12 +45,15 @@ const Row = ({ chatId }: { chatId: string }) => {
                 .toString()
                 .split(" ")[0]}
           </p>
-          {/*<p className="text-gray-400 line-clamp-1">{message?.translated?.[language] || "Get the conversation started..."}</p>*/}
+          <p className="text-gray-400 line-clamp-1">
+            {message?.translated?.[language] ||
+              "Get the conversation started..."}
+          </p>
         </div>
         <div className="text-xs text-gray-400 text-right">
           <p className="mx-auto">
             {message
-              ? new Date(message.timestamp.toDate()).toLocaleTimeString()
+              ? new Date(message.timestamp!.toDate()).toLocaleTimeString()
               : "No messages yet"}
           </p>
           <p>chat #{prettyUUID(chatId)}</p>

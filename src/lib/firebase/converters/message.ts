@@ -23,7 +23,7 @@ export interface Message {
   id?: string;
   input: string;
   timestamp: Timestamp | null;
-  translatedAt: Timestamp | null;
+  translatedAt?: Timestamp | null;
   user: User;
   translated?: {
     [K in LanguagesSupported]?: string;

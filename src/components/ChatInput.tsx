@@ -70,25 +70,33 @@ const ChatInput = ({ chatId }: { chatId: string }) => {
       });
     }
 
-    const docRef = await addDoc(messagesRef(chatId), {
-      input: inputCopy,
-      timestamp: serverTimestamp(),
-      user: {
-        id: session.user.id as string,
-        name: session.user.name as string,
-        email: session.user.email as string,
-        image: session.user.image as string,
-      },
-    });
+    try {
+      const docRef = await addDoc(messagesRef(chatId), {
+        input: inputCopy,
+        timestamp: serverTimestamp(),
+        user: {
+          id: session.user.id as string,
+          name: session.user.name as string,
+          email: session.user.email as string,
+          image: session.user.image as string,
+        },
+      });
 
-    await fetch("/api/translation", {
-      method: "POST",
-      body: JSON.stringify({ docRefId: docRef.id, chatId: chatId }),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
+      await fetch("/api/translation", {
+        method: "POST",
+        body: JSON.stringify({ docRefId: docRef.id, chatId: chatId }),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+    } catch (err) {
+      toast({
+        title: "Can't send Message!",
+        description: "Something occurred while trying to send the Message!",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
