@@ -31,6 +31,7 @@ const ChatMembersBadges = ({ chatId }: Props) => {
               variant="secondary"
               key={member.email}
               className="h-14 p-5 pl-2 pr-5 space-x-2"
+              isAdmin={member.userId === adminId}
             >
               <div className="flex items-center space-x-2">
                 <UserAvatar name={member.email} image={member.image} />
