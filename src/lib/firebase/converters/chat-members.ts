@@ -30,7 +30,7 @@ const chatMembersConverter: FirestoreDataConverter<ChatMember> = {
   },
   fromFirestore: (
     snapshot: QueryDocumentSnapshot<ChatMember>,
-    options: SnapshotOptions,
+    options: SnapshotOptions
   ) => {
     const data = snapshot.data(options);
 
@@ -40,21 +40,23 @@ const chatMembersConverter: FirestoreDataConverter<ChatMember> = {
 };
 
 export const chatMembersRef = (chatId: string) =>
-  doc(db, "chats", chatId, "members").withConverter(chatMembersConverter);
+  collection(db, "chats", chatId, "members").withConverter(
+    chatMembersConverter
+  );
 
 export const addChatRef = (chatId: string, userId: string) =>
   doc(db, "chats", chatId, "members", userId).withConverter(
-    chatMembersConverter,
+    chatMembersConverter
   );
 
 export const chatMemberAdminRef = (chatId: string) =>
   query(
     collection(db, "chats", chatId, "members"),
-    where("isAdmin", "==", true),
+    where("isAdmin", "==", true)
   ).withConverter(chatMembersConverter);
 
 export const chatMembersCollectionGroupRef = (userId: string) =>
   query(
     collectionGroup(db, "members"),
-    where("userId", "==", userId),
+    where("userId", "==", userId)
   ).withConverter(chatMembersConverter);

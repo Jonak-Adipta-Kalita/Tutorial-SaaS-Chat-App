@@ -1,4 +1,5 @@
 import ChatInput from "@/components/ChatInput";
+import ChatMembersBadges from "@/components/ChatMembersBadges";
 import ChatMessages from "@/components/ChatMessages";
 import { authOptions } from "@/lib/auth";
 import { sortedMessagesRef } from "@/lib/firebase/converters/message";
@@ -18,6 +19,7 @@ export default async ({
 
   return (
     <>
+      <ChatMembersBadges chatId={chatId} />
       <div className="flex-1">
         <ChatMessages
           chatId={chatId}
