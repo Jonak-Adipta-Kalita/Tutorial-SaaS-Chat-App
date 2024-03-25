@@ -44,6 +44,11 @@ export const chatMembersRef = (chatId: string) =>
     chatMembersConverter
   );
 
+export const chatMemberRef = (chatId: string, memberId: string) =>
+  doc(db, "chats", chatId, "members", memberId).withConverter(
+    chatMembersConverter
+  );
+
 export const addChatRef = (chatId: string, userId: string) =>
   doc(db, "chats", chatId, "members", userId).withConverter(
     chatMembersConverter
