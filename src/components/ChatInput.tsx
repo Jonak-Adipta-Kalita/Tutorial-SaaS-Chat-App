@@ -92,7 +92,7 @@ const ChatInput = ({ chatId }: { chatId: string }) => {
       });
     } catch (err) {
       toast({
-        title: "Can't send Message!",
+        title: "Couldn't send Message!",
         description: "Something occurred while trying to send the Message!",
         variant: "destructive",
       });
