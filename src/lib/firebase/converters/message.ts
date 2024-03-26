@@ -6,6 +6,7 @@ import {
   SnapshotOptions,
   Timestamp,
   collection,
+  doc,
   limit,
   orderBy,
   query,
@@ -51,6 +52,8 @@ const messageConverter: FirestoreDataConverter<Message> = {
     };
   },
 };
+
+export const messageRef = (chatId: string, messageId: string) => doc(db, "chats", chatId, "messages", messageId).withConverter(messageConverter);
 
 export const messagesRef = (chatId: string) =>
   collection(db, "chats", chatId, "messages").withConverter(messageConverter);

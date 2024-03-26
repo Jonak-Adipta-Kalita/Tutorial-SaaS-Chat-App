@@ -1,13 +1,18 @@
 "use client";
 
-import { Message, sortedMessagesRef } from "@/lib/firebase/converters/message";
+import {
+  Message,
+  messageRef,
+  sortedMessagesRef,
+} from "@/lib/firebase/converters/message";
 import { useLanguageStore } from "@/lib/store";
-import { MessageCircleIcon } from "lucide-react";
+import { MessageCircleIcon, Trash } from "lucide-react";
 import { Session } from "next-auth";
 import { createRef, useEffect } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import LoadingSpinner from "./LoadingSpinner";
 import UserAvatar from "./UserAvatar";
+import { deleteDoc, doc } from "firebase/firestore";
 
 type Props = {
   chatId: string;
@@ -54,11 +59,19 @@ const ChatMessages = ({ chatId, initialMessages, session }: Props) => {
           const isSender = message.user.id === session?.user.id;
 
           return (
-            <div key={message.id} className="flex my-2 items-end">
+            <div key={message.id} className="flex my-2 items-end group">
+              {isSender && (
+                <Trash
+                  className="h-7 text-gray-300 hidden group-hover:inline ml-auto cursor-pointer mr-2"
+                  onClick={() => {
+                    deleteDoc(messageRef(chatId, message.id!));
+                  }}
+                />
+              )}
               <div
                 className={`flex flex-col relative space-y-2 p-4 w-fit line-clamp-1 mx-2 rounded-xl ${
                   isSender
-                    ? "ml-auto bg-violet-600 text-white rounded-br-none"
+                    ? "bg-violet-600 text-white rounded-br-none group-hover:ml-0 ml-auto"
                     : "bg-gray-100 dark:text-gray-100 dark:bg-slate-700 rounded-bl-none"
                 }`}
               >
