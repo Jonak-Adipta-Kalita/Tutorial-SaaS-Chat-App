@@ -58,6 +58,14 @@ const CheckoutButton = () => {
 
   return (
     <div className="flex flex-col spance-y-2">
+      {isSubscribed && (
+        <>
+          <hr className="mt-5" />
+          <p className="pt-5 text-center text-xs font-semibold text-indigo-600">
+            You are subscribed to PRO
+          </p>
+        </>
+      )}
       <div className="mt-8 block rounded-md bg-indigo-600 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer disabled:opacity-80 disabled:bg-indigo-600/50 disabled:text-white disabled:cursor-default">
         {isSubscribed ? (
           <ManageAccountButton />
