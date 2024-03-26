@@ -22,7 +22,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { getDocs, serverTimestamp, setDoc } from "firebase/firestore";
+import { getDocs, query, serverTimestamp, setDoc, where } from "firebase/firestore";
 import {
   addChatRef,
   chatMembersRef,
@@ -94,6 +94,20 @@ const InviteUser = ({ chatId }: { chatId: string }) => {
       });
     } else {
       const user = querySnapshot.docs[0].data();
+
+      const userInChat = await getDocs(
+        query(chatMembersRef(chatId), where("email", "==", user.email))
+      );
+
+      if (!userInChat.empty) {
+        setOpen(false);
+        return toast({
+          title: "User already in chat",
+          description: "The user is already in the chat!",
+          variant: "destructive",
+        });
+      }
+
       await setDoc(addChatRef(chatId, user.id), {
         chatId,
         userId: user.id!,
